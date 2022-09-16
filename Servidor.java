@@ -1,25 +1,21 @@
 import java.awt.BorderLayout;
-import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 public class Servidor {
 	public static void main(String[] args) throws IOException {
+		
+		System.out.println("Conexão Iniciada");
 		
 		JFrame jFrame = new JFrame("Tela do Servidor");
 		jFrame.setSize(1000,1000);
@@ -40,6 +36,11 @@ public class Servidor {
 		new BufferedInputStream(entrada);
 
 		BufferedImage imagemBuff = ImageIO.read(buffEntrada);
+		
+		ImageIO.write(imagemBuff, "png",
+				new File("D:\\Trabalhos\\P6\\Sistemas Distribuidos"
+						+ "\\Atividade Socket\\Imagem do Servidor\\"
+						+ "Imagem de Teste 2.png"));
 
 		buffEntrada.close();
 		servidor.close();
@@ -47,6 +48,8 @@ public class Servidor {
 		JLabel jLabelImagem = new JLabel(new ImageIcon(imagemBuff));
 		jLabel.setText("Imagem Recebida");
 		jFrame.add(jLabelImagem, BorderLayout.CENTER);
+		
+		System.out.println("Conexão Encerrada");
 	}
 }
 
